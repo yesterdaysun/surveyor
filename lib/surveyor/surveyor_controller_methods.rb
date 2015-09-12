@@ -233,5 +233,43 @@ module Surveyor
         session[:surveyor_javascript] = "not_enabled"
       end
     end
+    
+    private 
+    
+    def survey_js_params
+      params.require(:surveyor_javascript_enabled)
+    end
+
+    def response_params
+      params.require(:r).permit(:question_id, :api_id,:answer_id, :text_value,:string_value, :integer_value,:datetime_value,:time_value,:date_value,:float_value)
+    end
+
+    def survey_code_params
+      params.require(:survey_code)
+    end
+
+    def survey_version_params
+      params.require(:survey_version) if params[:survey_version]
+    end
+
+    def section_params
+      params.require(:section).permit!
+    end
+
+    def response_set_params
+      params.require(:response_set_code)
+    end
+
+    def finish_params
+      params.require(:finish) if params[:finish]
+    end
+
+    def new_locale_params
+      params.require(:new_locale).permit! if params[:new_locale]
+    end
+
+    def locale_params
+      params.require(:locale).permit! if params[:locale]
+    end
   end
 end
